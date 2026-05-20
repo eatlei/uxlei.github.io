@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatDate, withBase } from "@/utils";
+
+const works = (await getCollection("work", ({ data }) => !data.draft))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .slice(0, 3);
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
+  .slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-28 md:pt-32 md:pb-40">
+    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-6">
+      Designer · Based in 🌏
+    </p>
+    <h1 class="font-serif text-5xl md:text-7xl leading-[1.05] tracking-tight max-w-4xl">
+      你好，我是 Leon —— <span class="italic text-[color:var(--color-accent)]">设计</span>是我的工作，<span class="italic">写字</span>是我的方式。
+    </h1>
+    <p class="mt-8 max-w-2xl text-lg text-[color:var(--muted)] leading-relaxed">
+      过去几年我专注在产品体验设计上，关心如何用「克制的界面」承载「真实的需求」。
+      除了作品，这里也会有一些关于工作、生活、阅读的随笔。
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-3 text-sm">
+      <a
+        href={withBase("/work")}
+        class="inline-flex items-center gap-2 rounded-full bg-[color:var(--fg)] text-[color:var(--bg)] px-5 py-2.5 transition-opacity hover:opacity-85"
+      >
+        浏览作品 <span aria-hidden="true">→</span>
+      </a>
+      <a
+        href={withBase("/blog")}
+        class="inline-flex items-center gap-2 rounded-full border border-[color:var(--rule)] px-5 py-2.5 hover:border-[color:var(--fg)] transition-colors"
+      >
+        阅读博客
+      </a>
+    </div>
+  </section>
+
+  {works.length > 0 && (
+    <section class="mx-auto max-w-6xl px-6 py-16 border-t border-[color:var(--rule)]">
+      <div class="flex items-baseline justify-between mb-10">
+        <h2 class="font-serif text-3xl">精选作品</h2>
+        <a href={withBase("/work")} class="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]">
+          查看全部 →
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
+        {works.map((w, i) => {
+          const span = i === 0 ? "md:col-span-7" : "md:col-span-5";
+          const offset = i === 1 ? "md:mt-16" : i === 2 ? "md:-mt-8 md:col-span-7" : "";
+          return (
+            <a
+              href={withBase(`/work/${w.id}`)}
+              class={`group block ${span} ${offset}`}
+            >
+              <div class="aspect-[4/3] rounded-md overflow-hidden bg-[color:var(--rule)] mb-4 relative">
+                {w.data.cover ? (
+                  <img src={w.data.cover} alt={w.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+                ) : (
+                  <div class="absolute inset-0 flex items-center justify-center font-serif text-4xl text-[color:var(--muted)]">
+                    {w.data.title.slice(0, 2)}
+                  </div>
+                )}
+              </div>
+              <p class="text-xs uppercase tracking-wider text-[color:var(--muted)] mb-1">
+                {w.data.year} · {w.data.role ?? "Design"}
+              </p>
+              <h3 class="font-serif text-xl group-hover:text-[color:var(--color-accent)] transition-colors">
+                {w.data.title}
+              </h3>
+              <p class="mt-1 text-[color:var(--muted)] text-sm">{w.data.summary}</p>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  {posts.length > 0 && (
+    <section class="mx-auto max-w-6xl px-6 py-16 border-t border-[color:var(--rule)]">
+      <div class="flex items-baseline justify-between mb-8">
+        <h2 class="font-serif text-3xl">最新文章</h2>
+        <a href={withBase("/blog")} class="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]">
+          全部文章 →
+        </a>
+      </div>
+      <ul class="divide-y divide-[color:var(--rule)]">
+        {posts.map((p) => (
+          <li>
+            <a href={withBase(`/blog/${p.id}`)} class="group flex items-baseline justify-between gap-6 py-5">
+              <span class="font-serif text-lg md:text-xl group-hover:text-[color:var(--color-accent)] transition-colors">
+                {p.data.title}
+              </span>
+              <span class="font-mono text-xs text-[color:var(--muted)] shrink-0">{formatDate(p.data.pubDate)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</BaseLayout>

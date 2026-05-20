@@ -1,0 +1,48 @@
+---
+import "@/styles/global.css";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE } from "@/consts";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} — ${SITE.name}` : SITE.title;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF9F6" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F0E0C" />
+
+    <script is:inline>
+      // Pre-paint theme set: read localStorage / fall back to system preference.
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const dark = stored ? stored === "dark" : prefersDark;
+          if (dark) document.documentElement.classList.add("dark");
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Nav />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

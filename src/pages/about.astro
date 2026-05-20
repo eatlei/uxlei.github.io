@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/consts";
+---
+
+<BaseLayout title="About">
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 md:pt-24">
+    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">About</p>
+    <h1 class="font-serif text-4xl md:text-6xl tracking-tight leading-[1.1] mb-10">
+      我是 Leon，一名<span class="italic text-[color:var(--color-accent)]">产品设计师</span>。
+    </h1>
+
+    <div class="prose-page">
+      <p>
+        过去几年我专注在 B 端产品和复杂工作流的体验设计上。
+        我相信好的设计是「看不见的」——用户用得顺手、效率提升，但不会特意注意到界面。
+      </p>
+
+      <p>
+        除了设计，我也写代码、读书、看电影。这个网站既是我的作品集，也是我的笔记本。
+      </p>
+
+      <h2>我能做什么</h2>
+      <ul>
+        <li>产品体验设计：从用户调研、信息架构到交互细节</li>
+        <li>设计系统搭建与维护</li>
+        <li>原型与可用性测试</li>
+        <li>与工程团队的高效协作</li>
+      </ul>
+
+      <h2>合作</h2>
+      <p>
+        目前在寻找新的设计师机会，全职或自由职业皆可。
+        如果你觉得我的作品和你的项目契合，欢迎联系。
+      </p>
+      <p>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a href={SITE.github}>GitHub</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { withBase } from "@/utils";
+
+const works = (await getCollection("work", ({ data }) => !data.draft))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+
+<BaseLayout title="Work" description="精选设计作品">
+  <section class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24">
+    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">Selected Work</p>
+    <h1 class="font-serif text-4xl md:text-6xl tracking-tight max-w-3xl leading-[1.1]">
+      用<span class="italic text-[color:var(--color-accent)]">克制的设计</span>解决具体的问题。
+    </h1>
+    <p class="mt-6 max-w-2xl text-[color:var(--muted)] leading-relaxed">
+      下面是我比较满意的一些项目，按重要程度排序。每个项目里都会写清楚背景、我的角色、做了哪些决策和遗憾。
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-16">
+    {works.map((w, i) => {
+      const pattern = i % 3;
+      const span = pattern === 0 ? "md:col-span-12" : pattern === 1 ? "md:col-span-7" : "md:col-span-5";
+      const offset = pattern === 2 ? "md:mt-12" : "";
+      return (
+        <a href={withBase(`/work/${w.id}`)} class={`group block ${span} ${offset}`}>
+          <div class="aspect-[16/10] rounded-md overflow-hidden bg-[color:var(--rule)] mb-5 relative">
+            {w.data.cover ? (
+              <img src={w.data.cover} alt={w.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+            ) : (
+              <div class="absolute inset-0 flex items-center justify-center font-serif text-5xl text-[color:var(--muted)]">
+                {w.data.title.slice(0, 2)}
+              </div>
+            )}
+          </div>
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 class="font-serif text-2xl group-hover:text-[color:var(--color-accent)] transition-colors">
+              {w.data.title}
+            </h2>
+            <span class="font-mono text-xs text-[color:var(--muted)] shrink-0">{w.data.year}</span>
+          </div>
+          <p class="mt-2 text-[color:var(--muted)]">{w.data.summary}</p>
+          {w.data.tags.length > 0 && (
+            <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+              {w.data.tags.map((t) => (
+                <li class="px-2 py-0.5 rounded-full border border-[color:var(--rule)] text-[color:var(--muted)]">{t}</li>
+              ))}
+            </ul>
+          )}
+        </a>
+      );
+    })}
+    {works.length === 0 && (
+      <p class="md:col-span-12 text-[color:var(--muted)]">作品集还在整理中。</p>
+    )}
+  </section>
+</BaseLayout>

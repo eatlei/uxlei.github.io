@@ -1,0 +1,17 @@
+---
+import { SITE } from "@/consts";
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-32 border-t border-[color:var(--rule)]">
+  <div class="mx-auto max-w-6xl px-6 py-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between text-sm text-[color:var(--muted)]">
+    <div>
+      <p class="font-serif text-base text-[color:var(--fg)] mb-1">让作品自己说话。</p>
+      <p>© {year} {SITE.author}. Made with care.</p>
+    </div>
+    <div class="flex gap-5">
+      <a href={`mailto:${SITE.email}`} class="hover:text-[color:var(--fg)] transition-colors">Email</a>
+      <a href={SITE.github} class="hover:text-[color:var(--fg)] transition-colors">GitHub</a>
+    </div>
+  </div>
+</footer>

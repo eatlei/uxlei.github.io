@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatDate, withBase } from "@/utils";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+
+const byYear = posts.reduce<Record<string, typeof posts>>((acc, p) => {
+  const y = String(p.data.pubDate.getFullYear());
+  (acc[y] ??= []).push(p);
+  return acc;
+}, {});
+const years = Object.keys(byYear).sort((a, b) => +b - +a);
+---
+
+<BaseLayout title="Blog" description="随笔与思考">
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-12 md:pt-24">
+    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">Journal</p>
+    <h1 class="font-serif text-4xl md:text-6xl tracking-tight leading-[1.1]">
+      <span class="italic">慢一点</span>，写得诚实一点。
+    </h1>
+    <p class="mt-6 text-[color:var(--muted)] leading-relaxed">
+      产品、设计、阅读和一些生活观察。更新随缘，质量优先。
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 pb-24">
+    {years.map((y) => (
+      <div class="mb-12">
+        <h2 class="font-mono text-xs uppercase tracking-wider text-[color:var(--muted)] mb-3 border-b border-[color:var(--rule)] pb-2">
+          {y}
+        </h2>
+        <ul>
+          {byYear[y].map((p) => (
+            <li>
+              <a href={withBase(`/blog/${p.id}`)} class="group flex items-baseline justify-between gap-6 py-4 border-b border-[color:var(--rule)]">
+                <div class="min-w-0">
+                  <h3 class="font-serif text-xl group-hover:text-[color:var(--color-accent)] transition-colors truncate">
+                    {p.data.title}
+                  </h3>
+                  {p.data.description && (
+                    <p class="mt-1 text-sm text-[color:var(--muted)] truncate">{p.data.description}</p>
+                  )}
+                </div>
+                <span class="font-mono text-xs text-[color:var(--muted)] shrink-0">
+                  {formatDate(p.data.pubDate)}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    {posts.length === 0 && (
+      <p class="text-[color:var(--muted)]">还没有文章。</p>
+    )}
+  </section>
+</BaseLayout>

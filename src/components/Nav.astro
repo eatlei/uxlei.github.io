@@ -1,0 +1,42 @@
+---
+import { NAV, SITE } from "@/consts";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL, "/").replace(/^\/+/, "/");
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<header class="border-b border-[color:var(--rule)]">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href={`${base}/`} class="font-serif text-xl tracking-tight">
+      {SITE.name}<span class="text-[color:var(--color-accent)]">.</span>
+    </a>
+
+    <nav class="flex items-center gap-1 text-sm">
+      {
+        NAV.map((item) => {
+          const href = `${base}${item.href}`;
+          const active = path === item.href || path.startsWith(item.href + "/");
+          return (
+            <a
+              href={href}
+              class:list={[
+                "px-3 py-1.5 rounded-full transition-colors",
+                active
+                  ? "text-[color:var(--fg)]"
+                  : "text-[color:var(--muted)] hover:text-[color:var(--fg)]",
+              ]}
+            >
+              {item.label}
+              {active && (
+                <span class="ml-1.5 inline-block h-1 w-1 rounded-full bg-[color:var(--color-accent)] align-middle"></span>
+              )}
+            </a>
+          );
+        })
+      }
+      <span class="mx-2 h-4 w-px bg-[color:var(--rule)]"></span>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
