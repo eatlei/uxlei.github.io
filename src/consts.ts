@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Leon",
-  title: "Leon — Designer & Writer",
-  description: "设计师 / 偶尔写字的人。作品集与博客。",
+  title: "Leon — Designer",
+  description: "设计作品集与博客。",
   url: "https://eatlei.github.io/uxlei.github.io",
   author: "Leon",
   email: "eatpoc@gmail.com",
