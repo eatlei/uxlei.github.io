@@ -4,8 +4,8 @@ export const SITE = {
   description: "设计作品集与博客。",
   url: "https://eatlei.github.io/uxlei",
   author: "Leon",
-  email: "eatpoc@gmail.com",
-  github: "https://github.com/eatlei",
+  email: "leonguooct@gmail.com",
+  x: "https://x.com/littlechaihu",
 };
 
 export const NAV = [

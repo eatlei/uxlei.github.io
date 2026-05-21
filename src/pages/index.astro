@@ -14,15 +14,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
 <BaseLayout>
   <section class="mx-auto max-w-6xl px-6 pt-20 pb-28 md:pt-32 md:pb-40">
-    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-6">
-      Designer
-    </p>
-    <h1 class="font-serif text-5xl md:text-7xl leading-[1.05] tracking-tight max-w-4xl">
-      你好，我是 Leon —— <span class="italic text-[color:var(--color-accent)]">设计</span>是我的工作，<span class="italic">写字</span>是我的方式。
+    <h1 class="font-display text-5xl md:text-7xl leading-[1.05] tracking-tight max-w-4xl">
+      你好，我是 Leon —— <span class="text-[color:var(--color-accent)]">设计</span>是我的工作，写字是我的方式。
     </h1>
-    <p class="mt-8 max-w-2xl text-lg text-[color:var(--muted)] leading-relaxed">
-      自我介绍待更新。这里会放设计作品集与博客文章。
-    </p>
 
     <div class="mt-10 flex flex-wrap gap-3 text-sm">
       <a
@@ -43,7 +37,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   {works.length > 0 && (
     <section class="mx-auto max-w-6xl px-6 py-16 border-t border-[color:var(--rule)]">
       <div class="flex items-baseline justify-between mb-10">
-        <h2 class="font-serif text-3xl">精选作品</h2>
+        <h2 class="font-display text-3xl">精选作品</h2>
         <a href={withBase("/work")} class="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]">
           查看全部 →
         </a>
@@ -61,7 +55,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
                 {w.data.cover ? (
                   <img src={w.data.cover} alt={w.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
                 ) : (
-                  <div class="absolute inset-0 flex items-center justify-center font-serif text-4xl text-[color:var(--muted)]">
+                  <div class="absolute inset-0 flex items-center justify-center font-display text-4xl text-[color:var(--muted)]">
                     {w.data.title.slice(0, 2)}
                   </div>
                 )}
@@ -69,7 +63,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
               <p class="text-xs uppercase tracking-wider text-[color:var(--muted)] mb-1">
                 {w.data.year} · {w.data.role ?? "Design"}
               </p>
-              <h3 class="font-serif text-xl group-hover:text-[color:var(--color-accent)] transition-colors">
+              <h3 class="font-display text-xl group-hover:text-[color:var(--color-accent)] transition-colors">
                 {w.data.title}
               </h3>
               <p class="mt-1 text-[color:var(--muted)] text-sm">{w.data.summary}</p>
@@ -83,19 +77,19 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   {posts.length > 0 && (
     <section class="mx-auto max-w-6xl px-6 py-16 border-t border-[color:var(--rule)]">
       <div class="flex items-baseline justify-between mb-8">
-        <h2 class="font-serif text-3xl">最新文章</h2>
+        <h2 class="font-display text-3xl">最新文章</h2>
         <a href={withBase("/blog")} class="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]">
           全部文章 →
         </a>
       </div>
-      <ul class="divide-y divide-[color:var(--rule)]">
+      <ul>
         {posts.map((p) => (
           <li>
-            <a href={withBase(`/blog/${p.id}`)} class="group flex items-baseline justify-between gap-6 py-5">
-              <span class="font-serif text-lg md:text-xl group-hover:text-[color:var(--color-accent)] transition-colors">
+            <a href={withBase(`/blog/${p.id}`)} class="group flex items-baseline justify-between gap-6 py-2.5 px-3 -mx-3 rounded-md hover:bg-[color-mix(in_oklab,var(--color-accent)_8%,transparent)] transition-colors">
+              <span class="text-lg leading-snug group-hover:text-[color:var(--color-accent)] transition-colors">
                 {p.data.title}
               </span>
-              <span class="font-mono text-xs text-[color:var(--muted)] shrink-0">{formatDate(p.data.pubDate)}</span>
+              <span class="font-mono text-xs text-[color:var(--muted)] shrink-0 tabular-nums">{formatDate(p.data.pubDate)}</span>
             </a>
           </li>
         ))}

@@ -1,22 +1,14 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { SITE } from "@/consts";
+import SocialLinks from "@/components/SocialLinks.astro";
 ---
 
 <BaseLayout title="About">
-  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 md:pt-24">
-    <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">About</p>
-    <h1 class="font-serif text-4xl md:text-6xl tracking-tight leading-[1.1] mb-10">
-      我是 Leon，一名<span class="italic text-[color:var(--color-accent)]">设计师</span>。
+  <section class="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28">
+    <h1 class="font-display text-4xl md:text-6xl tracking-tight leading-[1.1] mb-8">
+      我是 Leon，一名<span class="text-[color:var(--color-accent)]">设计师</span>。
     </h1>
 
-    <div class="prose-page">
-      <p class="text-[color:var(--muted)] italic">关于我的介绍待更新。</p>
-
-      <h2>联系</h2>
-      <p>
-        <a href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a href={SITE.github}>GitHub</a>
-      </p>
-    </div>
+    <SocialLinks />
   </section>
 </BaseLayout>

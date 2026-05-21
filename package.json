@@ -14,9 +14,9 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
-    "@fontsource/instrument-serif": "^5.2.5",
     "@fontsource/inter": "^5.2.7",
     "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/space-grotesk": "^5.2.10",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.14.0",
     "remark-breaks": "^4.0.0",

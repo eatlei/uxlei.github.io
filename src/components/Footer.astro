@@ -1,5 +1,6 @@
 ---
 import { SITE } from "@/consts";
+import SocialLinks from "@/components/SocialLinks.astro";
 const year = new Date().getFullYear();
 ---
 
@@ -8,9 +9,6 @@ const year = new Date().getFullYear();
     <div>
       <p>© {year} {SITE.author}</p>
     </div>
-    <div class="flex gap-5">
-      <a href={`mailto:${SITE.email}`} class="hover:text-[color:var(--fg)] transition-colors">Email</a>
-      <a href={SITE.github} class="hover:text-[color:var(--fg)] transition-colors">GitHub</a>
-    </div>
+    <SocialLinks />
   </div>
 </footer>

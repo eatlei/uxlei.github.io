@@ -3,8 +3,8 @@
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -12,20 +12,20 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --font-serif: "Instrument Serif", "Source Han Serif SC", "Songti SC",
-    Georgia, serif;
+  --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-paper: #faf9f6;
-  --color-ink: #1a1815;
-  --color-muted: #6b6760;
-  --color-rule: #e7e3da;
-  --color-accent: #c26b3b;
+  --color-paper: #f6f8fb;
+  --color-ink: #14171d;
+  --color-muted: #5e6675;
+  --color-rule: #e3e7ee;
+  --color-accent: #3b6fd4;
 
-  --color-paper-dark: #0f0e0c;
-  --color-ink-dark: #e8e6e0;
-  --color-muted-dark: #8a857c;
-  --color-rule-dark: #2a2823;
+  --color-paper-dark: #0c0e13;
+  --color-ink-dark: #e7e9ee;
+  --color-muted-dark: #838b9b;
+  --color-rule-dark: #232834;
 }
 
 :root {
@@ -80,7 +80,7 @@
 .prose-page h1,
 .prose-page h2,
 .prose-page h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.01em;
   margin-top: 2.25em;
@@ -110,9 +110,7 @@
   padding-left: 1.25em;
   margin: 1.5em 0;
   color: var(--muted);
-  font-style: italic;
-  font-family: var(--font-serif);
-  font-size: 1.15em;
+  font-size: 1.1em;
 }
 .prose-page code {
   font-family: var(--font-mono);

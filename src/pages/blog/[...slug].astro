@@ -23,12 +23,12 @@ const { Content } = await render(entry);
       {entry.data.updatedDate && <> · 更新于 {formatDate(entry.data.updatedDate)}</>}
     </p>
 
-    <h1 class="font-serif text-4xl md:text-5xl leading-[1.15] tracking-tight mb-6">
+    <h1 class="font-display text-4xl md:text-5xl leading-[1.15] tracking-tight mb-6">
       {entry.data.title}
     </h1>
 
     {entry.data.description && (
-      <p class="text-lg text-[color:var(--muted)] mb-10 leading-relaxed border-l-2 border-[color:var(--color-accent)] pl-4 italic font-serif">
+      <p class="text-lg text-[color:var(--muted)] mb-10 leading-relaxed border-l-2 border-[color:var(--color-accent)] pl-4">
         {entry.data.description}
       </p>
     )}
