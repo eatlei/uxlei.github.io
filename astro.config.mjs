@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://eatlei.github.io',
-  base: '/uxlei.github.io',
+  base: '/uxlei',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   vite: {

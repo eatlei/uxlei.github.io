@@ -2,7 +2,7 @@ export const SITE = {
   name: "Leon",
   title: "Leon — Designer",
   description: "设计作品集与博客。",
-  url: "https://eatlei.github.io/uxlei.github.io",
+  url: "https://eatlei.github.io/uxlei",
   author: "Leon",
   email: "eatpoc@gmail.com",
   github: "https://github.com/eatlei",

@@ -17,7 +17,7 @@ const BLOG_OUT = path.join(PROJECT_ROOT, "src", "content", "blog");
 const IMG_OUT = path.join(PROJECT_ROOT, "public", "blog");
 
 // 网站部署在子路径下，图片绝对路径要带上它。来源：astro.config.mjs 的 base 字段。
-const BASE = "/uxlei.github.io";
+const BASE = "/uxlei";
 
 const IMG_EXT = new Set([".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".avif", ".bmp"]);
 

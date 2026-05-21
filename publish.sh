@@ -30,4 +30,4 @@ git push
 
 echo ""
 echo "✅ 推送完成。GitHub Action 正在构建，1-2 分钟后访问："
-echo "   https://eatlei.github.io/uxlei.github.io/"
+echo "   https://eatlei.github.io/uxlei/"
