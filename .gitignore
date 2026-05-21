@@ -6,3 +6,7 @@ dist
 .env.production
 *.log
 .claude/
+.obsidian/
+
+# Obsidian 写作库（本地工作区，发布时同步进 src/content/blog，由 iCloud 备份，不入库）
+/uxlei/
